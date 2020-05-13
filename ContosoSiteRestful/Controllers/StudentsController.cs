@@ -28,9 +28,9 @@ namespace ContosoSiteRestful.Controllers
                 EnrollmentDate = student.EnrollmentDate.ToString("MM/dd/yyyy HH:mm:ss"),
             }).ToList();
 
-            var responseJson = new Dictionary<string, dynamic>();
+            var responseJson = new Dictionary<dynamic, dynamic>();
             responseJson.Add("status", "ok");
-            responseJson.Add("result", new Dictionary<string, dynamic>());
+            responseJson.Add("result", new Dictionary<dynamic, dynamic>());
             responseJson["result"].Add("students", students);
 
             return Json(responseJson, JsonRequestBehavior.AllowGet);
@@ -53,9 +53,9 @@ namespace ContosoSiteRestful.Controllers
                 EnrollmentDate = st.EnrollmentDate.ToString("MM/dd/yyyy HH:mm:ss")
             }).FirstOrDefault();
 
-            var responseJson = new Dictionary<string, dynamic>();
+            var responseJson = new Dictionary<dynamic, dynamic>();
             responseJson.Add("status", "ok");
-            responseJson.Add("result", new Dictionary<string, dynamic>());
+            responseJson.Add("result", new Dictionary<dynamic, dynamic>());
             responseJson["result"].Add("student", student);
 
             return Json(responseJson, JsonRequestBehavior.AllowGet);
@@ -68,47 +68,39 @@ namespace ContosoSiteRestful.Controllers
         {
             db.Student.Add(student);
             db.SaveChanges();
-
-            var responseJson = new Dictionary<string, dynamic>();
-            responseJson.Add("status", "ok");
-
-            return Json(responseJson, JsonRequestBehavior.AllowGet);
+            return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
         }
 
         // PUT: /api/students/:id
-        [AcceptVerbs(HttpVerbs.Put | HttpVerbs.Post)]
-        [Route("api/students/update/{id:regex(\\d+)}")]
-        public ActionResult Update([Bind(Include = "StudentID,LastName,FirstName,EnrollmentDate")] Student student, int id)
+        [HttpPut]
+        [Route("api/students/{id:regex(\\d+)}")]
+        public ActionResult Update([Bind(Include = "StudentID,LastName,FirstName,EnrollmentDate")] Student updatedStudent, int id)
         {
-            Student studentQuery = (from st in db.Student
-                                    where st.StudentID == id
-                                    select st).FirstOrDefault();
+            Student student = db.Student.Find(id);
 
-            studentQuery.LastName = student.LastName;
-            studentQuery.FirstName = student.FirstName;
-            studentQuery.EnrollmentDate = student.EnrollmentDate;
+            if (student == null) return Json(new { status = "id doesn't exist" }, JsonRequestBehavior.AllowGet);
+
+            student.LastName = updatedStudent.LastName;
+            student.FirstName = updatedStudent.FirstName;
+            student.EnrollmentDate = updatedStudent.EnrollmentDate;
 
             db.SaveChanges();
-
-            var responseJson = new Dictionary<string, dynamic>();
-            responseJson.Add("status", "ok");
-
-            return Json(responseJson, JsonRequestBehavior.AllowGet);
+            return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
         }
 
         // DELETE: /api/students/:id
-        [AcceptVerbs(HttpVerbs.Delete | HttpVerbs.Post)]
-        [Route("api/students/delete/{id:regex(\\d+)}")]
+        [HttpDelete]
+        [Route("api/students/{id:regex(\\d+)}")]
         public ActionResult Delete(int id)
         {
+            
             Student student = db.Student.Find(id);
+            
+            if (student == null) return Json(new { status = "id doesn't exist" }, JsonRequestBehavior.AllowGet);
+
             db.Student.Remove(student);
             db.SaveChanges();
-
-            var responseJson = new Dictionary<string, dynamic>();
-            responseJson.Add("status", "ok");
-
-            return Json(responseJson, JsonRequestBehavior.AllowGet);
+            return Json(new { status = "ok" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
