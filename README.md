@@ -37,4 +37,5 @@ See the solution in these two links on how to resolve this issue:
 ## Notes for testing REST API endpoints via Postman
 - When testing your REST API endpoints using Postman, make sure the **SSL certificate verification** is turned off in 
 the settings. See image below.
-![alt text](./images/postman-settings.png "Error in query")
+
+![alt text](./images/postman-settings.png "Postman Settings")
