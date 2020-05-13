@@ -1,6 +1,13 @@
 # ASP.NET-MVC-Trial-3
 RESTful CRUD App Single Resource
 
+## REST API endpoints
+- [GET] /api/students - Index() - Get all students
+- [GET] /api/students/:id - Show() - Get a student resource
+- [POST] /api/students - Create() - Create a student resource
+- [PUT | POST] /api/students/update/:id - Update() - Update a student resource
+- [DELETE | POST] /api/students/delete/:id - Delete() - Delete a student resource
+
 ## Notes for Local IIS deployment
 1. Enable local IIS feature in your Windows machine. This [link](https://www.youtube.com/watch?v=PPaqVyBkwMk) shows how to setup your local IIS on your Windows machine
 as well as on how to publish your ASP.NET MVC web application on your local IIS
