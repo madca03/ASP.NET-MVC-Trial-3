@@ -39,7 +39,7 @@ namespace ContosoSiteRestful.Controllers
 
         // GET: /api/students/:id
         [HttpGet]
-        [Route("api/students/{id:regex(\\d+)}")]
+        [Route("api/students/{id:regex(^[0-9]+$)}")]
         public ActionResult Show(int id)
         {
             var query = (from st in db.Student
@@ -76,7 +76,7 @@ namespace ContosoSiteRestful.Controllers
 
         // PUT: /api/students/:id
         [HttpPut]
-        [Route("api/students/{id:regex(\\d+)}")]
+        [Route("api/students/{id:regex(^[0-9]+$)}")]
         public ActionResult Update([Bind(Include = "StudentID,LastName,FirstName,EnrollmentDate")] Student updatedStudent, int id)
         {
             Student student = db.Student.Find(id);
@@ -93,10 +93,9 @@ namespace ContosoSiteRestful.Controllers
 
         // DELETE: /api/students/:id
         [HttpDelete]
-        [Route("api/students/{id:regex(\\d+)}")]
+        [Route("api/students/{id:regex(^[0-9]+$)}")]
         public ActionResult Delete(int id)
         {
-            
             Student student = db.Student.Find(id);
             
             if (student == null) return Json(new { status = APIResponseStatusCodes.ID_DOES_NOT_EXIST }, JsonRequestBehavior.AllowGet);
