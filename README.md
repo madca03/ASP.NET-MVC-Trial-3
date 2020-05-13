@@ -6,4 +6,4 @@ RESTful CRUD App Single Resource
 as well as on how to publish your ASP.NET MVC web application on your local IIS
 2. If you are using Entity framework and Microsoft SQL Server, you may encounter problems on database authentication when you're
 browsing / fetching your RESTful API routes 
-![alt text](images/error-in-local-iis-db-auth "Error in query")
+![alt text](https://github.com/madca03/ASP.NET-MVC-Trial-3/blob/master/images/error-in-local-iis-db-auth.png "Error in query")
