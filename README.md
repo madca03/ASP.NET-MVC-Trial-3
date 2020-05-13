@@ -34,4 +34,7 @@ See the solution in these two links on how to resolve this issue:
 - [Link 1](https://stackoverflow.com/questions/7698286/login-failed-for-user-iis-apppool-asp-net-v4-0)
 - [Link 2](https://docs.microsoft.com/en-us/previous-versions/sql/sql-server-2008-r2/ms189121(v=sql.105)?redirectedfrom=MSDN)
 
-3. With the ASP.NET MVC app deployed on your local IIS server, you can now test your RESTful routes using [Postman](https://www.postman.com/)
+## Notes for testing REST API endpoints via Postman
+- When testing your REST API endpoints using Postman, make sure the **SSL certificate verification** is turned off in 
+the settings. See image below.
+![alt text](./images/postman-settings.png "Error in query")
