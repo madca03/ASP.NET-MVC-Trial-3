@@ -29,10 +29,12 @@ namespace ContosoSiteRestful.Controllers
                 EnrollmentDate = student.EnrollmentDate.ToString("MM/dd/yyyy HH:mm:ss"),
             }).ToList();
 
-            var responseJson = new Dictionary<dynamic, dynamic>();
-            responseJson.Add("status", APIResponseStatusCodes.SUCCESS);
-            responseJson.Add("result", new Dictionary<dynamic, dynamic>());
-            responseJson["result"].Add("students", students);
+
+            var responseJson = new 
+            {
+                status = APIResponseStatusCodes.SUCCESS,
+                result = students
+            };
 
             return Json(responseJson, JsonRequestBehavior.AllowGet);
         }
@@ -56,10 +58,12 @@ namespace ContosoSiteRestful.Controllers
 
             if (student == null) return Json(new { status = APIResponseStatusCodes.ID_DOES_NOT_EXIST }, JsonRequestBehavior.AllowGet);
 
-            var responseJson = new Dictionary<dynamic, dynamic>();
-            responseJson.Add("status", APIResponseStatusCodes.SUCCESS);
-            responseJson.Add("result", new Dictionary<dynamic, dynamic>());
-            responseJson["result"].Add("student", student);
+
+            var responseJson = new
+            {
+                status = APIResponseStatusCodes.SUCCESS,
+                result = student
+            };
 
             return Json(responseJson, JsonRequestBehavior.AllowGet);
         }
